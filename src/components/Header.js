@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import { LOGO_URL } from "../../utils/constant";
+import { Link } from "react-router";
 
 const Header = () => {
-    const [loggedIn, setLoggedIn] = useState(false)
+    const [loggedIn, setLoggedIn] = useState(false);
+    useEffect(() => {
+      console.log("header")
+    }, []);
+
+    // if empty dependency array use effect will be called only once on the initial render.
     return (
       <div className="header" id="header">
         <div>
@@ -13,9 +19,21 @@ const Header = () => {
         </div>
         <div className="nav-items">
           <ul>
-            <li>Home</li>
-            <li>About Us</li>
-            <li>Contact Us</li>
+          <li>
+              <Link to="/">
+                Home
+              </Link>
+              </li>
+            <li>
+              <Link to="/about">
+                About Us
+              </Link>
+             </li>
+            <li>
+              <Link to="/contact">
+              Contact Us
+              </Link>
+             </li>
             <li>Cart</li>
             <button className="login-btn" onClick={() => {
               if (loggedIn) {

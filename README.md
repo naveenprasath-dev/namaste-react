@@ -56,3 +56,7 @@ after rendering it will become an html.
         a. useState()
         b. useEffect()
 
+# Routing
+    1. Client Side Routing.
+    2. Server side Routing.
+

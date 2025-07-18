@@ -3,6 +3,7 @@ import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import resList from "../../utils/mockData";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router";
 const Body = () => {
   // state Variable - Powerful variable  - useState.
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -53,10 +54,10 @@ const Body = () => {
   // ];
 
   const fetchData  = async () => {
-    const res = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.99740&lng=79.00110&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+    const res = await fetch("https://swiggy-api-4c740.web.app/swiggy-api.json");
     const data = await res.json();
-    setListOfRestaurants(data?.data?.cards[4]?.card?.card.gridElements.infoWithStyle.restaurants|| []);
-    setFilteredRestaurants(data?.data?.cards[4]?.card?.card.gridElements.infoWithStyle.restaurants|| []);
+    setListOfRestaurants(data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants|| []);
+    setFilteredRestaurants(data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants|| []);
 
     // optional chaining
     // console.log(data?.data?.cards[4].card.card.gridElements.infoWithStyle.restaurants[0].info|| [], "data");
@@ -95,7 +96,10 @@ const Body = () => {
         <div className="res-container">
           {/* Restaurant card */}
           {filteredRestaurants.map((restaurant) => (
-            <RestaurantCard key={restaurant?.info?.id} resData={restaurant} />
+            <Link  key={restaurant?.info?.id} to={"/restaurant/"+ restaurant?.info?.id}>            
+              <RestaurantCard  resData={restaurant} /> 
+            </Link>
+
           ))}
   
           {/* <RestaurantCard resName="KFC" cuisine="Burger, Fast Food" /> */}
